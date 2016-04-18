@@ -1,7 +1,3 @@
-# gillians-game
-
-login screen code!
-
 //
 //  LoginPageViewController.swift
 //  LoginDemo
@@ -17,7 +13,6 @@ class LoginPageViewController: UIViewController {
     @IBOutlet weak var childInitialsTextField: UITextField!
 
     @IBOutlet weak var childBirthdateTextField: UITextField!
-    @IBOutlet weak var emailAddressTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,15 +29,15 @@ class LoginPageViewController: UIViewController {
         
         let childInitials = childInitialsTextField.text;
         let childBirthdate = childBirthdateTextField.text;
-        let emailAddress = emailAddressTextField.text;
+    
         
         print (childInitials);
         print (childBirthdate);
-        print (emailAddress);
+
         
         //check empty fields
         
-        if(childInitials == "" || childBirthdate == "" || emailAddress == "") {
+        if(childInitials == "" || childBirthdate == "") {
             
             //display alert message
             
@@ -51,11 +46,33 @@ class LoginPageViewController: UIViewController {
         }
         
         //check birthdate format
-
-        if(Int((Array(arrayLiteral: childBirthdate))[0]!) > 1){
+        if((Int(String(childBirthdate![(childBirthdate?.startIndex.advancedBy(0))!])))>1){
             displayAlertMessage("Incorrect birthdate");
             return;
         }
+        else if ((String(childBirthdate![(childBirthdate?.startIndex.advancedBy(2))!])) != "/"){
+                displayAlertMessage("Incorrect birthdate");
+            return;
+        } else if ((Int(String(childBirthdate![(childBirthdate?.startIndex.advancedBy(3))!])))>3) {
+            displayAlertMessage("Incorrect birthdate");
+            return;
+        } else if ((String(childBirthdate![(childBirthdate?.startIndex.advancedBy(5))!])) != "/") {
+            displayAlertMessage("Incorrect birthdate");
+            return;
+        }
+        
+        
+        
+        
+
+        /*
+        if(Int((Array(arrayLiteral: childBirthdate))[0]!) > 1){
+            displayAlertMessage("Incorrect birthdate");
+            return;
+ 
+        }
+        
+        */
         
 
         
@@ -64,7 +81,6 @@ class LoginPageViewController: UIViewController {
         //store field data
         NSUserDefaults.standardUserDefaults().setObject(childInitials, forKey: "childInitials");
         NSUserDefaults.standardUserDefaults().setObject(childBirthdate, forKey: "childBirthdate");
-        NSUserDefaults.standardUserDefaults().setObject(emailAddress, forKey: "emailAddress");
         
         
     }
