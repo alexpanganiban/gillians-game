@@ -1,0 +1,81 @@
+//
+//  ColorViewController.swift
+//  LoginDemo
+//
+//  Created by Alex Panganiban on 4/15/16.
+//  Copyright © 2016 Alex Panganiban. All rights reserved.
+//
+
+import UIKit
+
+class ColorViewController: UIViewController {
+    
+    @IBOutlet weak var duck1: UIButton!
+    @IBOutlet weak var duck2: UIButton!
+    
+    
+    @IBOutlet weak var fish1: UIButton!
+    @IBOutlet weak var fish2: UIButton!
+    @IBOutlet weak var fish3: UIButton!
+    @IBOutlet weak var fish4: UIButton!
+    @IBOutlet weak var fish5: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+
+        // Do any additional setup after loading the view.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func duck1Tapped(sender: AnyObject) {
+        let image = UIImage(named: "ColoredDuck.png") as UIImage!
+        self.duck1.setImage(image, forState: .Normal)
+    }
+    
+    @IBAction func duck2Tapped(sender: AnyObject) {
+        let image = UIImage(named: "ColoredDuck.png") as UIImage!
+        self.duck2.setImage(image, forState: .Normal)
+    }
+    
+    @IBAction func fish1Tapped(sender: AnyObject) {
+        let image = UIImage(named: "ColoredFish.png") as UIImage!
+        self.fish1.setImage(image, forState: .Normal)
+    }
+    
+    @IBAction func fish2Tapped(sender: AnyObject) {
+        let image = UIImage(named: "ColoredFish.png") as UIImage!
+        self.fish2.setImage(image, forState: .Normal)
+    }
+    
+    @IBAction func fish3Tapped(sender: AnyObject) {
+        let image = UIImage(named: "ColoredFish.png") as UIImage!
+        self.fish3.setImage(image, forState: .Normal)
+    }
+    
+    @IBAction func fish4Tapped(sender: AnyObject) {
+        let image = UIImage(named: "ColoredFish.png") as UIImage!
+        self.fish4.setImage(image, forState: .Normal)
+    }
+    
+    @IBAction func fish5Tapped(sender: AnyObject) {
+        let image = UIImage(named: "ColoredFish.png") as UIImage!
+        self.fish5.setImage(image, forState: .Normal)
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
