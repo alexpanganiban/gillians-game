@@ -52,6 +52,22 @@ class LoginPageViewController: UIViewController {
             return;
         }
         
+        //check birthdate format
+        if((Int(String(birthdate![(birthdate?.startIndex.advancedBy(0))!])))>1){
+            displayAlertMessage("Incorrect format! Please re-enter the date.");
+            return;
+        }
+        else if ((String(birthdate![(birthdate?.startIndex.advancedBy(2))!])) != "/"){
+            displayAlertMessage("Incorrect format! Please re-enter the date.");
+            return;
+        } else if ((Int(String(birthdate![(birthdate?.startIndex.advancedBy(3))!])))>3) {
+            displayAlertMessage("Incorrect format! Please re-enter the date.");
+            return;
+        } else if ((String(birthdate![(birthdate?.startIndex.advancedBy(5))!])) != "/") {
+            displayAlertMessage("Incorrect format! Please re-enter the date.");
+            return;
+        }
+        
         //Display alert message with confirmation
         
         var myAlert = UIAlertController(title: "Alert", message: "Registration successful", preferredStyle: UIAlertControllerStyle.Alert);
