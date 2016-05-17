@@ -7,11 +7,21 @@
 //
 
 import UIKit
+import AVFoundation 
 
 class DuckColorViewController: UIViewController {
 
 
-
+    var duck1Colored = false
+    var duck2Colored = false
+    
+    var fish1Colored = false
+    var fish2Colored = false
+    var fish3Colored = false
+    var fish4Colored = false
+    var fish5Colored = false
+    
+    
 
     @IBOutlet weak var duck1: UIButton!
     @IBOutlet weak var duck2: UIButton!
@@ -23,10 +33,24 @@ class DuckColorViewController: UIViewController {
     @IBOutlet weak var fish5: UIButton!
 
     @IBOutlet weak var logoutButton: UIButton!
+    
+    var audioInstructions = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("instructions", ofType: "mp3")!))
+    
+    var goodJob = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ducks", ofType: "mp3")!))
+    
+    var bubbles = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("bubbles", ofType: "wav")!))
+    
+    var quack = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("quack", ofType: "wav")!))
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        audioInstructions.play()
+        audioCongrats()
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -37,48 +61,96 @@ class DuckColorViewController: UIViewController {
     }
     
     @IBAction func duck1Tapped(sender: AnyObject) {
+        if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
         let image = UIImage(named: "newDuck.png") as UIImage!
         self.duck1.setImage(image, forState: .Normal)
+        }
+        quack.play()
+        duck1Colored = true
+        
+        
+        print(duck1Colored)
+        
         
     }
     
     @IBAction func duck2Tapped(sender: AnyObject) {
+        if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
         let image = UIImage(named: "newDuck.png") as UIImage!
         self.duck2.setImage(image, forState: .Normal)
+        }
+        quack.play()
+        duck2Colored = true
+        
+
     }
     
     @IBAction func fish1Tapped(sender: AnyObject) {
         let image = UIImage(named: "colorfish.png") as UIImage!
         self.fish1.setImage(image, forState: .Normal)
+        bubbles.play()
+        fish1Colored = true
+        if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
+            goodJob.play()
+        }
     }
     
     @IBAction func fish2Tapped(sender: AnyObject) {
         let image = UIImage(named: "colorfish.png") as UIImage!
         self.fish2.setImage(image, forState: .Normal)
+        bubbles.play()
+        fish2Colored = true
+        if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
+            goodJob.play()
+        }
+        print(fish2Colored)
+
     }
 
     @IBAction func fish3Tapped(sender: AnyObject) {
         let image = UIImage(named: "colorfish.png") as UIImage!
         self.fish3.setImage(image, forState: .Normal)
+        bubbles.play()
+        fish3Colored = true
+        if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
+            goodJob.play()
+        }
+        print(fish3Colored)
     }
 
     @IBAction func fish4Tapped(sender: AnyObject) {
         let image = UIImage(named: "colorfish.png") as UIImage!
         self.fish4.setImage(image, forState: .Normal)
+        bubbles.play()
+        fish4Colored = true
+        if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
+            goodJob.play()
+        }
+        print(fish4Colored)
     }
 
     
     @IBAction func fish5Tapped(sender: AnyObject) {
         let image = UIImage(named: "colorfish.png") as UIImage!
         self.fish5.setImage(image, forState: .Normal)
+        bubbles.play()
+        fish5Colored = true
+        if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
+            goodJob.play()
+        }
+        print(fish5Colored)
     }
+    
+    func audioCongrats() {
+        if (fish1Colored == true){
+            goodJob.play()
+        }
+    }
+    
+    
     
 
-    
-    @IBAction func logoutButtonTapped(sender: AnyObject) {
-        super.viewDidLoad();
-        //self.viewWillAppear(true);
-    }
+
     
     
     //Logout Process
