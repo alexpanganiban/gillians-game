@@ -1,17 +1,16 @@
 //
-//  DuckColorViewController.swift
-//  ALEX
+//  FirstColorGameViewController.swift
+//  ALEXforTFC
 //
-//  Created by Alex Panganiban on 4/30/16.
+//  Created by Alex Panganiban on 5/24/16.
 //  Copyright © 2016 TFC. All rights reserved.
 //
 
 import UIKit
-import AVFoundation 
+import AVFoundation
 
-class DuckColorViewController: UIViewController {
-
-
+class FirstColorGameViewController: UIViewController {
+    
     var duck1Colored = false
     var duck2Colored = false
     
@@ -21,38 +20,48 @@ class DuckColorViewController: UIViewController {
     var fish4Colored = false
     var fish5Colored = false
     
+    var allColored = UIImageView(frame: CGRectMake(0, 0, 1024, 768));
+    var image = UIImage(named: "All-Colored.png");
+    var orangeFish = UIImage(named: "OrangeFish.png");
+    var duck = UIImage(named: "newDuck.png");
     
-
     @IBOutlet weak var duck1: UIButton!
     @IBOutlet weak var duck2: UIButton!
+    
     
     @IBOutlet weak var fish1: UIButton!
     @IBOutlet weak var fish2: UIButton!
     @IBOutlet weak var fish3: UIButton!
     @IBOutlet weak var fish4: UIButton!
     @IBOutlet weak var fish5: UIButton!
-
-    @IBOutlet weak var logoutButton: UIButton!
+    
+    @IBOutlet weak var narrator: UIButton!
+    @IBOutlet weak var progressTapped: UIButton!
+    
     
     var audioInstructions = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("instructions", ofType: "mp3")!))
     
-    var goodJob = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ducks", ofType: "mp3")!))
-    
     var bubbles = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("bubbles", ofType: "wav")!))
     
-    var quack = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("quack", ofType: "wav")!))
+    var goodJob = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("ducks", ofType: "mp3")!))
     
+    var quack = try! AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("quack", ofType: "wav")!))
 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        
+        progressTapped.hidden = true
         
         audioInstructions.play()
         audioCongrats()
         
-        
-
-        // Do any additional setup after loading the view.
+        if (duck1Colored == false || duck2Colored == false || fish1Colored == false || fish2Colored == false || fish3Colored == false || fish4Colored == false || fish5Colored == false) {
+            progressTapped.hidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,32 +71,52 @@ class DuckColorViewController: UIViewController {
     
     @IBAction func duck1Tapped(sender: AnyObject) {
         if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
-        let image = UIImage(named: "newDuck.png") as UIImage!
-        self.duck1.setImage(image, forState: .Normal)
+            UIView.transitionWithView(self.duck1,
+                                      duration:0.5,
+                                      options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                      animations: { self.duck1.setImage(self.duck, forState: .Normal)},
+                                      completion: nil)
         }
+        
         quack.play()
         duck1Colored = true
         
-        
-        print(duck1Colored)
-        
-        
+        if (duck1Colored == true && duck2Colored == true){
+            self.duck1.frame = CGRectMake(0, 0, 1024, 768);
+            let image = UIImage(named: "All-Colored.png") as UIImage!
+            
+            self.duck1.setImage(image, forState: .Normal)
+        }
     }
     
     @IBAction func duck2Tapped(sender: AnyObject) {
         if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
-        let image = UIImage(named: "newDuck.png") as UIImage!
-        self.duck2.setImage(image, forState: .Normal)
+            UIView.transitionWithView(self.duck2,
+                                      duration:0.5,
+                                      options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                      animations: { self.duck2.setImage(self.duck, forState: .Normal)},
+                                      completion: nil)
         }
         quack.play()
         duck2Colored = true
         
-
+        if (duck1Colored == true && duck2Colored == true){
+            self.duck2.frame = CGRectMake(0, 0, 1024, 768);
+            let image = UIImage(named: "All-Colored.png") as UIImage!
+            self.duck2.setImage(image, forState: .Normal)
+        }
     }
     
+    
+    
+    
+    
     @IBAction func fish1Tapped(sender: AnyObject) {
-        let image = UIImage(named: "colorfish.png") as UIImage!
-        self.fish1.setImage(image, forState: .Normal)
+        UIView.transitionWithView(self.fish1,
+                                  duration:0.5,
+                                  options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                  animations: { self.fish1.setImage(self.orangeFish, forState: .Normal)},
+                                  completion: nil)
         bubbles.play()
         fish1Colored = true
         if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
@@ -95,21 +124,29 @@ class DuckColorViewController: UIViewController {
         }
     }
     
+    
     @IBAction func fish2Tapped(sender: AnyObject) {
-        let image = UIImage(named: "colorfish.png") as UIImage!
-        self.fish2.setImage(image, forState: .Normal)
+        UIView.transitionWithView(self.fish2,
+                                  duration:0.5,
+                                  options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                  animations: { self.fish2.setImage(self.orangeFish, forState: .Normal)},
+                                  completion: nil)
         bubbles.play()
         fish2Colored = true
         if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
             goodJob.play()
-        }
         print(fish2Colored)
-
+        }
     }
-
+        
+    
+    
     @IBAction func fish3Tapped(sender: AnyObject) {
-        let image = UIImage(named: "colorfish.png") as UIImage!
-        self.fish3.setImage(image, forState: .Normal)
+        UIView.transitionWithView(self.fish3,
+                                  duration:0.5,
+                                  options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                  animations: { self.fish3.setImage(self.orangeFish, forState: .Normal)},
+                                  completion: nil)
         bubbles.play()
         fish3Colored = true
         if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
@@ -117,10 +154,15 @@ class DuckColorViewController: UIViewController {
         }
         print(fish3Colored)
     }
-
+    
+    
+    
     @IBAction func fish4Tapped(sender: AnyObject) {
-        let image = UIImage(named: "colorfish.png") as UIImage!
-        self.fish4.setImage(image, forState: .Normal)
+        UIView.transitionWithView(self.fish4,
+                                  duration:0.5,
+                                  options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                  animations: { self.fish4.setImage(self.orangeFish, forState: .Normal)},
+                                  completion: nil)
         bubbles.play()
         fish4Colored = true
         if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
@@ -128,18 +170,24 @@ class DuckColorViewController: UIViewController {
         }
         print(fish4Colored)
     }
-
+    
+    
     
     @IBAction func fish5Tapped(sender: AnyObject) {
-        let image = UIImage(named: "colorfish.png") as UIImage!
-        self.fish5.setImage(image, forState: .Normal)
+        UIView.transitionWithView(self.fish5,
+                                  duration:0.5,
+                                  options: UIViewAnimationOptions.TransitionCrossDissolve,
+                                  animations: { self.fish5.setImage(self.orangeFish, forState: .Normal)},
+                                  completion: nil)
         bubbles.play()
         fish5Colored = true
         if (fish1Colored == true && fish2Colored == true && fish3Colored == true && fish4Colored == true && fish5Colored == true) {
             goodJob.play()
         }
         print(fish5Colored)
+        
     }
+    
     
     func audioCongrats() {
         if (fish1Colored == true){
@@ -147,15 +195,19 @@ class DuckColorViewController: UIViewController {
         }
     }
     
+    @IBAction func progressButtonTapped(sender: AnyObject) {
+        if (duck1Colored == false || duck2Colored == false || fish1Colored == false || fish2Colored == false || fish3Colored == false || fish4Colored == false || fish5Colored == false) {
+            progressTapped.hidden = true
+        }
+    }
+
+    
+    
+    
+    
     
     
 
-
-    
-    
-    //Logout Process
-
-    
     /*
     // MARK: - Navigation
 
